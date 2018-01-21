@@ -3,6 +3,7 @@
 
 #define PWM_PIN 6
 #include <RTOS.h>
+#define motor1_set(x) motor_set(0,x);
 osThreadId thread_id_pwm;
 osThreadId thread_id_loop;
 int pins[5]={3,5,9,10,11};
@@ -40,8 +41,8 @@ static void Thread_Loop(void const *argument)
 
 
 void setup() {
-   Serial.begin(115200);
-  motor_init(400);
+   Serial.begin(115200); 
+  motor_init(400,1500,500);
  pinMode(13,OUTPUT);
  
 
@@ -55,7 +56,8 @@ void setup() {
 int i=0;
 void loop() {
  
-  motor_set(0,(i%100)*0.01);
+  //motor_set(0,(i%100)*0.01);
+  motor1_set((i%100)*0.01);
      Serial.print("RTOS Cnt : ");
   Serial.println(i++);
   digitalWrite(led_pin, !digitalRead(13));  // set to as HIGH LED is turn-off

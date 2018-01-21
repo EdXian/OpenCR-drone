@@ -10,8 +10,13 @@
 #include "drv_pwm.h"
 #include "hw.h"
 
-
-void motor_init(int freq);
+typedef struct {
+  int freq;
+  int high;
+  int low ;
+} motor_profile;
+void motor_init(int freq , int High , int Low);
+//void motor_init(motor_profile *profile);
 void motor_set(int num,float duty);
 
 #ifdef __cplusplus

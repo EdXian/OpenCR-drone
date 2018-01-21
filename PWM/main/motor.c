@@ -8,12 +8,18 @@ int pwm_pins[5] = { 3, 5, 9, 10, 11 };
   TIM_OC_InitTypeDef        OC9;
   TIM_OC_InitTypeDef        OC11;
   TIM_OC_InitTypeDef        OC12;
-int frequency ;
+int frequency;
+int high;
+int low;
 
 
-void motor_init(int freq){
+void motor_init(int freq , int High , int Low){
 	
-  frequency = freq;	
+  //frequency = freq;	
+  
+   frequency = freq;
+   high = High;
+   low = Low;
   TIM_HandleTypeDef  *pTIM;
   TIM_OC_InitTypeDef *pOC;
   uint32_t tim_ch;
@@ -101,7 +107,7 @@ TIM_HandleTypeDef  *pTIM;
   {
     return;
   }
-  pOC->Pulse = duty*2500;
+  pOC->Pulse = (duty*(high-low))+low;
   HAL_TIM_PWM_ConfigChannel(pTIM, pOC, tim_ch);
   HAL_TIM_PWM_Start(pTIM, tim_ch); 
 
