@@ -37,7 +37,7 @@ static void Thread_print(void const *argument)
   for(;;)
   {
     pub_joy.linear.x = value1;
-     pub_joy.linear.y = value2;
+    pub_joy.linear.y = value2;
     joy_pub.publish(&pub_joy);
    // nh.spinOnce();
    osDelay(30);
@@ -69,7 +69,10 @@ void  setup()
 }
 void  loop()
 { 
+ 
   digitalWrite(13,!digitalRead(13));
+ 
+
 	nh.spinOnce();
 	osDelay(30);
 }
