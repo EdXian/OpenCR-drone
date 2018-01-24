@@ -1,6 +1,6 @@
 #ifndef _STABLE_H
 #define _STABLE_H
-#include "RTOS.h"
+
 #ifdef __cplusplus
  extern "C" {
 #endif
