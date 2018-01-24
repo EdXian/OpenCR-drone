@@ -49,6 +49,8 @@ static void Thread_print(void const *argument)
 void  setup()
 {
   pinMode(13,OUTPUT);
+  Serial1.begin(9600);
+  
   pub_joy.linear.x = 0;
   pub_joy.linear.y = 0;
   pub_joy.linear.z = 0;
@@ -71,8 +73,10 @@ void  loop()
 { 
  
   digitalWrite(13,!digitalRead(13));
- 
-
+  Serial1.print(value1);
+  Serial1.print("\t");
+  
+  Serial1.println(value2);
 	nh.spinOnce();
 	osDelay(30);
 }

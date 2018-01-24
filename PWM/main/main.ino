@@ -24,6 +24,9 @@ static void Thread_PWM(void const *argument)
     Serial.print("RTOS Cnt : ");
     Serial.println(i++);
     digitalWrite(led_pin, !digitalRead(13));  // set to as HIGH LED is turn-off
+    Serial1.print("serial1  ");
+    Serial1.println(i++);
+   
     osDelay(100);
    
   }
@@ -43,6 +46,10 @@ static void Thread_Loop(void const *argument)
 
 void setup() {
    Serial.begin(115200); 
+   Serial1.begin(9600); 
+   Serial2.begin(9600); 
+   Serial3.begin(9600); 
+  
   motor_init(400,2020,1050);  //set cutoff value
  pinMode(13,OUTPUT);
  
@@ -63,11 +70,11 @@ void loop() {
   }else{
     j+=0.01;
   }
-  motor1_set(0.2);
+  motor1_set(j);
   motor2_set(0.3);
   motor3_set(0.3);
   motor4_set(0.3);
  
-  osDelay(100);  
+  osDelay(50);  
 }
 
