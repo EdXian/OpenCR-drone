@@ -7,10 +7,17 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-
- void task(void const *argument);
+enum{
+  safe = 1,
+  lpe,
+  gps,
+  flow,
+  stable,
+  error,
+};
+void task(void const *argument);
 bool getstatus(uint8_t *state);
-
+bool setstatus(uint8_t state);
 #ifdef __cplusplus
 }
 #endif
