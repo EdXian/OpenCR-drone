@@ -6,6 +6,8 @@ osThreadId thread_id_receive;
 uint8_t state_=0;
 static void Thread_Loop(void const *argument)
 {
+  state_ = 0;
+  setstatus(state_);
   (void) argument;
   for(;;)
   { 
@@ -18,7 +20,7 @@ static void receive(void const *argument)
 {
   (void) argument;
 
-  uint8_t data;
+  uint8_t data=0;
   for(;;)
   {
     if(Serial.available()){
@@ -31,7 +33,6 @@ static void receive(void const *argument)
 }
 void setup() {
   Serial.begin(9600);
-  
   // put your setup code here, to run once:
   osThreadDef(THREAD_NAME_LOOP, Thread_Loop, osPriorityNormal, 0, 1024);
   thread_id_loop = osThreadCreate(osThread(THREAD_NAME_LOOP), NULL);

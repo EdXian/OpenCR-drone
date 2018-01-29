@@ -3,6 +3,8 @@ uint8_t get_state=0;
 uint8_t last_state=0;
 QueueHandle_t state_queue;
 int led_pin_user[4] = { BDPIN_LED_USER_1, BDPIN_LED_USER_2, BDPIN_LED_USER_3, BDPIN_LED_USER_4 };
+//int led_pin_user[4] ={ BDPIN_GPIO_1  , BDPIN_GPIO_3, BDPIN_GPIO_5, BDPIN_GPIO_7 };
+
 void task(void const *argument)
 {
   pinMode(13,OUTPUT);
@@ -11,11 +13,12 @@ void task(void const *argument)
   pinMode(led_pin_user[2], OUTPUT);
   pinMode(led_pin_user[3], OUTPUT);
   state_queue = xQueueCreate( 1, sizeof( uint8_t ) );
+  get_state = 0;
   (void) argument;
   while(1){
     
     xQueueOverwrite( state_queue, &get_state );
-    
+   
     if(last_state != get_state){
       for(int count = 0 ; count<4 ; count++){
         digitalWrite(led_pin_user[count], 1);
@@ -46,6 +49,6 @@ bool getstatus(uint8_t *state){
 }
 
 bool setstatus(uint8_t state){
-  get_state = state;
+  get_state =state;
 }
 
