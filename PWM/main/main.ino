@@ -70,8 +70,8 @@ void loop() {
   }else{
     j+=0.01;
   }
-  motor1_set(j);
-  motor2_set(0.3);
+  motor1_set(0.0);
+  motor2_set(0.0);
   motor3_set(0.3);
   motor4_set(0.3);
  
